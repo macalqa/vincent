@@ -1,0 +1,35 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	DIVIDE            3000
+//	FIRSTLOOP         3005
+//	SECONDLOOP        3008
+//	NOTYET            300C
+//	LESS              3012
+//	FINISH            3020
+//	EQUAL             3023
+//	PUSH1             3027
+//	PUSH2             302F
+//	POPPER            3034
+//	DONE              303C
+//	ASCII_0           3041
+//	SAVE_R4           3042
+//	SAVE_R3           3043
+//	SAVE_R7           3044
+//	SAVE_R2           3045
+//	SAVE_R1           3046
+//	PUSH              3048
+//	OVERFLOW          3056
+//	DONE_PUSH         3057
+//	PUSH_SaveR3       305A
+//	PUSH_SaveR4       305B
+//	POP               305C
+//	UNDERFLOW         3069
+//	DONE_POP          306A
+//	POP_SaveR3        306D
+//	POP_SaveR4        306E
+//	STACK_END         306F
+//	STACK_START       3070
+//	STACK_TOP         3071
+

@@ -1,0 +1,43 @@
+Compilation Results:
+********************
+mp3.c: In function 'int main()':
+mp3.c:35:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for(i = n; i > p; i--)
+                      ^
+mp3.c:42:21: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(j = 1; j <= k; j++)
+                     ^
+mp3.c:65:24: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(i = n; i > p; i--)
+                        ^
+mp3.c:72:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for( j = 1; j <= k; j++)
+                      ^
+
+Test Case 1:
+********************
+test1 passed
+
+Test Case 2:
+********************
+test2 passed
+
+Test Case 3:
+********************
+test3 passed
+
+Test Case 4:
+********************
+test4 passed
+
+Test Case 5:
+********************
+test5 passed
+
+Grade:
+******
+Late submission: 0
+Functionality: 90 
+Comments and Style: 5
+Intro paragraph: 5
+Total: 100

@@ -1,0 +1,13 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	DIGIT             3002
+//	BIT               3007
+//	ONE               300F
+//	FOUR              3012
+//	ZERO              301C
+//	Sixfive           3022
+//	Zero1             3023
+//	DONE              3024
+

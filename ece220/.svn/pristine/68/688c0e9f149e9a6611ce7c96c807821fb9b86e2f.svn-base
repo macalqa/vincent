@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int row_index;
+  printf("Enter the row index : ") ;
+  scanf("%d",&row_index) ;
+  int n=row_index ;
+  double y ;
+  unsigned long int out;
+  int k;
+  k=0;
+  double kf = 0;
+  double nf = 0;
+  double sub;
+  int i;
+  
+  while ( (k>= 0) && (k<= n))
+  { 
+   double factorial = 1;
+   kf = k; 
+   for (i=1; i<=kf; ++i)
+   	{ 
+   		factorial = factorial * i ;
+   	}
+   	kf = factorial;
+   	factorial = 1;
+		nf = n;
+   	for (i=1; i<=nf; ++i)
+   	 {
+   		factorial = factorial * i ;
+   	 }
+    nf= factorial;
+   	factorial = 1;
+   	sub = n-k;
+   	for (i=1; i<=(sub); ++i)
+   	 {
+   		factorial = factorial * i;
+ 
+   	 }
+   	sub = factorial;
+
+    if ((kf>-1) && (sub>-1))
+   	 {	
+  	 y = nf / (kf * (sub));
+  	 out = y ;
+  	 printf("%ld ", out); 
+  	 }
+   	k++;
+   }
+
+  return 0;
+}
+
+

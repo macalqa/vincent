@@ -1,0 +1,278 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+
+double abs_double(double y)
+{
+	double result;
+	if (y<0)
+	{
+		y = y * -1;			
+	}
+	result = y;
+    return result;
+}
+
+double fx_val(double a, double b, double c, double d, double e, double x)
+{
+	double first,second,third,fourth,final;
+	first = (x*x*x*x)*a;
+	second = (x*x*x)*b;
+	third = (x*x)*c;
+	fourth = x*d;
+	final = first + second + third + fourth + e;
+	
+    return final;
+}
+
+double fx_dval(double a, double b, double c, double d, double e, double x)
+{
+	double first1, second1, third1, answer;
+	first1 = (x*x*x)*a*4;
+	second1 = (x*x)*b*3;
+	third1 = x*2*c;
+	answer = first1 + second1 + third1 + d;
+
+    return answer;
+}
+
+double fx_ddval(double a, double b, double c, double d, double e, double x)
+{
+	double first2,second2,answer2;
+	first2 = (x*x)*a*12;
+	second2 = 6*b*x;
+	answer2 = first2 + second2 + (2*c);
+    return answer2;
+}
+
+
+double newrfind_halley(double a, double b, double c, double d, double e, double x)
+{
+
+	double xn;
+	double xfx;
+	double xd;
+	double xdd;
+	double xntop;
+	double xnbot;
+	double abs_xd;
+	double xroot;
+	
+		
+
+		xfx = fx_val (a,b,c,d,e,x);
+		xd = fx_dval (a,b,c,d,e,x);
+		xdd = fx_ddval (a,b,c,d,e,x);
+		abs_xd = abs_double (xd);
+		xntop = (2 * xfx * xd); 
+		xnbot = (2 * (abs_xd*abs_xd)) - (xfx * xdd); 
+		xn = xntop / xnbot ;
+		xroot = x - xn;
+
+    return (xroot);
+}
+
+int rootbound(double a, double b, double c, double d, double e, double r, double l)
+{
+		double x,y;
+		double vl = 0;
+		double vr = 0;
+		double result_rootbound;
+		double abs_rootbound;
+		double first_l,second_l,third_l,fourth_l,fifth_l;
+		first_l = a;
+		second_l = (4 * a * l) + b;
+		third_l = (6 * a * (l * l) ) + (2 * b * l) + c;
+		fourth_l = (4 * a * (l * l * l) ) + (3 * b * (l * l) ) + (2 * c * l) + d;
+		fifth_l = (a * (l * l * l * l) ) + ( b * ( l * l * l) ) + ( c * ( l * l) ) + ( d * l) + e;
+
+		x = first_l;
+		y = second_l;
+		if ((x>0) && (y<0))
+		{
+			vl = vl + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vl = vl + 1;
+		}
+		x = second_l;
+		y = third_l;
+		if ((x>0) && (y<0))
+		{
+			vl = vl + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vl = vl + 1;
+		}
+		x = third_l;
+		y = fourth_l;
+		if ((x>0) && (y<0))
+		{
+			vl = vl + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vl = vl + 1;
+		}
+		x = fourth_l;
+		y = fifth_l;
+		if ((x>0) && (y<0))
+		{
+			vl = vl + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vl = vl + 1;
+		}
+	
+	
+		double first_r,second_r,third_r,fourth_r,fifth_r;
+		first_r = a;
+		second_r = (4 * a * r) + b;
+		third_r = (6 * a * (r * r) ) + (2 * b * r) + c;
+		fourth_r = (4 * a * (r * r * r) ) + (3 * b * (r * r) ) + (2 * c * r) + d;
+		fifth_r = (a * (r * r * r * r) ) + ( b * ( r * r * r) ) + ( c * ( r * r) ) + ( d * r) + e;
+
+		x = first_r;
+		y = second_r;
+		if ((x>0) && (y<0))
+		{
+			vr = vr + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vr = vr + 1;
+		}
+		x = second_r;
+		y = third_r;
+		if ((x>0) && (y<0))
+		{
+			vr = vr + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vr = vr + 1;
+		}
+		x = third_r;
+		y = fourth_r;
+		if ((x>0) && (y<0))
+		{
+			vr = vr + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vr = vr + 1;
+		}
+		x = fourth_r;
+		y = fifth_r;
+		if ((x>0) && (y<0))
+		{
+			vr = vr + 1;
+		}
+		if ((x<0) && (y>0))
+		{
+			vr = vr + 1;
+		}
+	
+	abs_rootbound = vl - vr ;
+	if (abs_rootbound < 0 )
+	{
+	  abs_rootbound = abs_rootbound *-1;
+	}
+	result_rootbound = abs_rootbound ;
+    
+    return result_rootbound;
+}
+
+int main(int argc, char **argv)
+{
+	double a, b, c, d, e, l, r;
+	FILE *in;
+
+	if (argv[1] == NULL) 
+	{
+		printf("You need an input file.\n");
+		return -1;
+	}
+	in = fopen(argv[1], "r");
+	if (in == NULL)
+		return -1;
+	fscanf(in, "%lf", &a);
+	fscanf(in, "%lf", &b);
+	fscanf(in, "%lf", &c);
+	fscanf(in, "%lf", &d);
+	fscanf(in, "%lf", &e);
+	fscanf(in, "%lf", &l);
+	fscanf(in, "%lf", &r);
+    
+    //The values are read into the variable a, b, c, d, e, l and r.
+    //You have to find the bound on the number of roots using rootbound function.
+    //If it is > 0 try to find the roots using newrfind function.
+    //You may use the fval, fdval and fddval funtions accordingly in implementing the halleys's method.
+   	double roots_num;
+	double found_root;
+	double x;	
+	double n;
+	roots_num = rootbound(a,b,c,d,e,l,r);
+	if (roots_num == 0)
+	{
+		printf("The polynomial has no roots in the given interval. \n");
+		return (0);
+	}
+    	
+		
+	while (l<=r)
+		{
+			x = l; 
+			found_root = 0;
+			for ((n=0) ; (n <= 10000) ; (n++))
+			{
+				roots_num = newrfind_halley(a,b,c,d,e,x);
+				double x_diff = (roots_num - x);
+				if (abs_double(x_diff) < 0.000001)
+				{
+					printf("Root found: %f \n", roots_num);
+					found_root = found_root +1;
+					n = 10001;
+				}
+  			 x = roots_num;
+						
+			}
+
+			if (found_root ==0)
+			{
+				printf("No roots found. \n");
+				
+			}	
+		l = l + 0.5;	
+				
+		}
+
+	
+			
+			//if (found_root == -555)
+			//{
+			//	printf("No roots found. \n");
+				
+			//}
+			//if (found_root != -555)
+			//{
+			//	printf("Root found: %f. \n", found_root);	
+			//	roots_num = roots_num - 1;
+			//}
+			//l = l + 0.5;
+		//}
+		//if (l>r)
+		//{
+		//	roots_num = 0;
+		//}
+
+	
+    fclose(in);
+    
+    return 0;
+}

@@ -1,0 +1,19 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	GETCHAR           3008
+//	START             3009
+//	TYPEII            3014
+//	ASTERISK          3018
+//	PRINTLOOP         301F
+//	OUTERLOOP         3021
+//	INNER             3025
+//	LASTADDR          302E
+//	FIRSTADDR         302F
+//	ASCII_ZERO        3030
+//	ASCII_NINE        3031
+//	ASCII_NEG_ASTERISK  3032
+//	ASCII_NEG_ZERO    3033
+//	STRING_START      3034
+

@@ -1,0 +1,288 @@
+#include "sparsemat.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void insert_tuples(double val, sp_tuples* mat_t, int row, int col);
+void delete_tuples(int row, int col, sp_tuples* mat_t);
+
+sp_tuples * load_tuples(char* input_file)
+{
+  int row,col;
+  FILE * file = fopen(input_file, "r");
+  fscanf(file,"%d %d",&row,&col);
+  sp_tuples * tuple = malloc(sizeof(sp_tuples));
+  tuple->tuples_head = (sp_tuples_node*)malloc(sizeof(sp_tuples_node));
+  tuple->tuples_head=NULL;
+  tuple->m = row;
+  tuple->n = col;
+  int i,j;
+  double k;
+  while ((!feof(file)))
+  {
+    fscanf(file,"%d %d %lf\n",&i,&j,&k);
+    if (k!=0)
+    {
+      tuple->nz++;
+    }
+  }
+  rewind(file);
+  fscanf(file,"%d %d %lf\n",&i,&j,&k);
+  while (!feof(file))
+  {
+    fscanf(file,"%d %d %lf\n",&i,&j,&k);
+   
+    set_tuples(tuple, i, j ,k);
+  }
+  fclose(file);
+  return tuple;
+}
+
+
+
+double gv_tuples(sp_tuples * mat_t,int row,int col)
+
+{
+  sp_tuples_node* current = mat_t->tuples_head;
+  while ((current!=NULL))
+    {
+      if ((current->row*mat_t->n+current->col) == (row*mat_t->n + col))
+      {
+        return current->value;
+      }
+      current = current->next;
+    }
+    return 0.0;
+}
+
+
+
+void set_tuples(sp_tuples * mat_t, int row, int col, double value)
+{
+  sp_tuples_node * current = mat_t->tuples_head;
+  sp_tuples_node * prev = mat_t->tuples_head;
+
+  if ((value == 0) && (current == NULL))   // weird case check
+  {
+    return;
+  }
+  else if (value == 0)                  //delete if the value at the tuple is 0
+  {
+    delete_tuples(row,col, mat_t);
+    return;
+  }
+  else if (current == NULL)
+  {
+    insert_tuples(value,mat_t,row,col);      //insert if the value at the tuple is not 0
+    return;
+  }
+  else
+  {
+
+    if (current != NULL)
+    {
+
+      if ((current->row==row) && (current->col==col))  //if there is a repeat value and same column and row
+      {
+        current->value = value;
+      }
+      else
+      {
+        insert_tuples(value,mat_t,row,col);   //inserts a node with these values
+      }
+      prev = current;
+      current = current->next;
+      return;
+    }
+    
+  }
+
+}
+
+void save_tuples(char * file_name, sp_tuples * mat_t)
+{
+  int rows,cols,row,col;
+  double value;
+  sp_tuples_node * node = mat_t->tuples_head;
+  FILE *file = fopen(file_name, "w");
+  rows = mat_t->m;
+  cols = mat_t->n;
+  fprintf(file, "%d %d", rows, cols);
+  while (node != NULL)
+  {
+      row = node->row;
+      col = node->col;
+      value = node->value;
+      fprintf(file, "%d %d %lf", row,col,value);
+      node = node->next;
+  }
+  fclose(file);
+  return;
+}
+
+
+
+sp_tuples * add_tuples(sp_tuples * matA, sp_tuples * matB)
+{
+  if (matA->m != matB->n || matA->n != matB->n)
+  {
+      return NULL;
+  }
+  int row,col;
+  double value;
+  sp_tuples * matC = (sp_tuples*)malloc(sizeof(sp_tuples));
+  matC->m = matA->m;
+  matC->n = matA->n;
+  matC->nz = matA->nz;
+  matC->tuples_head = NULL;
+  sp_tuples_node * nodeA = matA->tuples_head;
+  sp_tuples_node * nodeB = matB->tuples_head;
+  sp_tuples_node * nodeC = matC->tuples_head;
+  while (nodeA!=NULL)
+  {
+	row = nodeA->row;
+	col = nodeA->col;
+        value = nodeA->value;
+	set_tuples(matC,row,col,value);
+	nodeA = nodeA->next;
+  }
+  nodeC = matC->tuples_head;
+  while ( nodeC != NULL)
+  {
+     if ((nodeC->row == nodeB->row)&&(nodeC->col == nodeB->col))
+     {
+        nodeC->value = nodeC->value + nodeB->value;
+        nodeC = nodeC->next;
+        nodeB = nodeB->next;
+     }
+     else if ((nodeC->row*matC->n + nodeC->col) > (nodeB->row*matB->n + nodeB->col)) 
+     {
+	int val = 0;
+        insert_tuples(val,matC,nodeB->row,nodeB->col);
+        nodeC = matC->tuples_head;
+        while ((nodeC->row*matC->n + nodeC->col) != (nodeB->row*matB->n + nodeB->col))
+        {
+           nodeC = nodeC->next; 
+        }
+	nodeC->value = nodeC->value + nodeB->value;
+	matC->nz++;
+	nodeC = nodeC->next;
+	nodeB = nodeB->next;
+     }
+     else if ((nodeC->row*matC->n + nodeC->col) < (nodeB->row*matB->n + nodeB->col))
+     {
+         int row,col;
+	 row = nodeB->row;
+	 col = nodeB->col; 
+	 while (nodeC->row != row && nodeC->col != col)
+         {
+            nodeC = nodeC->next;
+         }
+     }
+   }
+  return matC;
+}
+
+sp_tuples * mult_tuples(sp_tuples * matA, sp_tuples * matB)
+{
+
+ 	
+	
+    return 1;
+
+}
+
+
+
+void destroy_tuples(sp_tuples * mat_t)
+{
+  sp_tuples_node * temp;
+  sp_tuples_node * curr = mat_t->tuples_head;
+  while (curr != NULL)
+  {
+    temp = curr->next;
+    free(curr);
+    curr = temp; 
+    curr = curr->next;
+  }
+  free (mat_t);
+  return;
+}
+
+
+void delete_tuples(int row, int col, sp_tuples* mat_t)
+{
+  sp_tuples_node ** list = &(mat_t->tuples_head);
+  sp_tuples_node * current = *list;
+  sp_tuples_node * prev = *list;
+  while ((current != NULL) && (current->next!=NULL))
+  {
+    if( (current->row == row) && (current->col == col))
+    {
+      break;
+    }
+    prev = current;
+    current = current->next;
+  }
+  if(current == *list)
+  {
+    *list = current->next;
+                                // if node you want to delete is the head
+  }
+  //else if (current->next==NULL)
+  //{
+  //  prev->next = NULL;         // if node you want to delete is the tail
+  //}
+  else
+  {
+    prev->next = current->next; // if node you want to delete a node in the middle
+  }
+  free(current);
+  return;
+}
+
+void insert_tuples(double val, sp_tuples* mat_t, int row, int col)
+{
+  sp_tuples_node ** list = &(mat_t->tuples_head);
+  sp_tuples_node * current = *list;
+  sp_tuples_node * prev = *list;
+
+  sp_tuples_node* new = (sp_tuples_node*)malloc(sizeof(sp_tuples_node));
+  new->next = NULL;
+  new->value = val;
+  new->row = row;
+  new->col = col;
+
+  while(current!=NULL)
+  { 
+    if (current->value == 0)
+    {
+       *list = new;
+    }
+    if((new->row * mat_t->n+new->col) < (current->row * mat_t->n+current->col))
+    {
+      new->next = current;
+      if(current == *list)
+      {
+        *list = new;
+      }
+      else
+      {
+        prev->next = new;
+      }
+      return;
+    }
+    if(current->next == NULL)
+    {
+      current->next = new;
+      new->next = NULL;
+    }
+    prev = current;
+    current = current->next;
+  }
+}
+
+
+
+

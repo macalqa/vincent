@@ -1,0 +1,38 @@
+ Lab 1 
+ ; assignment: develop a code to print a value stored in a register 
+ ;             as a hexadecimal number to the monitor
+ ; algorithm: turnin each group of four bits into a digit
+ ;            calculate the corresponding ASCII character;
+ ;            print the character to the monitor
+
+ .ORIG x3000
+START   LDI R3,KBSR, #0 ;takes input from 
+		Brzp START		;keyboard and 
+		LDI R3,KBDR, #0 ;places into R3
+		Brnzp NEXT
+
+NEXT	AND R6, R6, #0   ;initialize R6 
+		ADD R6, R6, #-3  ;R6 has value -3
+OUTERL	ADD R6, R6, #1   ;increment outer digit counter
+		Brzp DONE        ;if digits = 4, branch to DONE
+		AND R5, R5, #0   ;initialize R5
+		AND R4, R4, #0	 ;initialize R4
+		ADD R5, R5, #-3  ;R5 has value -3
+INNERL  ADD R5, R5, #1   ;increment inner digit counter
+		Brzp ASCII       ;if bits = 4, branch to ASCII
+		ADD R3, R3, #0   ;shifts digit left
+		
+		
+		
+	
+
+
+ ; stop the computer
+ HALT
+
+ ; program data section starts here
+KBSR .FILL xFE00
+KBDR .FILL xFE02
+
+ .END
+

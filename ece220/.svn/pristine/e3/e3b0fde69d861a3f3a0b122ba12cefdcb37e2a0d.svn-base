@@ -1,0 +1,15 @@
+Compilation Results:
+********************
+
+mdb2: memory error: out of bound pointer at game.c line:140
+****** Testing make_game() out of  20 ******
+test - make_game() pointer: Pass [+5]
+test - initialized cells: pass [+10]
+test - rows, cols, and score: pass [+5]
+Grade: 20 / 20
+
+****** Testing get_cell() out of  5 ******
+test - get_cell(): [+3][+2]
+Grade: 5 / 5
+
+****** Testing move_d() out of  8 ******

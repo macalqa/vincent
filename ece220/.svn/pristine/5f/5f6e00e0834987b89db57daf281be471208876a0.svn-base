@@ -1,0 +1,18 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	PSquare           3009
+//	OUTER             300E
+//	START             3019
+//	LOOP              301E
+//	NEXT              3022
+//	DONE              3024
+//	LOOP2             302B
+//	FINISH            302F
+//	SAVE_N            3036
+//	SAVE_R7           3037
+//	SAVE_R2           3038
+//	SAVE_R0           3039
+//	SAVE_R1           303A
+
