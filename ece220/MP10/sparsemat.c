@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//micaela bernichio
-//mdb2
-//04-13-16
 //This program uses various functions in order to do operations on sparse matrices
 //there are also a few helper functions added in to help out with what
 //needs to be done.

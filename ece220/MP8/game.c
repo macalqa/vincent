@@ -1,8 +1,5 @@
 #include "game.h"
 
-//Micaela Bernichio
-//mdb2
-//04-1-17
 game * make_game(int rows, int cols)
 /*! Create an instance of a game structure with the given number of rows
     and columns, initializing elements to -1 and return a pointer

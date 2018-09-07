@@ -1,5 +1,0 @@
-.ORIG x4000
-
-.STRINGZ "4Good*"
-HALT
-.END

@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//Micaela Bernichio
-//mdb2
 // This program calculates the numbers in the "nth" row of pascals triangle
 // by taking the facotorials of the components and storing the result
 // as an unsigned long.

@@ -5,9 +5,6 @@
 //-------------------------------------------------------------------------------------------------
 //
 //
-//Micaela Bernichio
-//mdb2
-//03-16-17
 //
 //
 // You are free to declare any private functions if needed.

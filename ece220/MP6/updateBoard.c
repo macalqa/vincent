@@ -1,6 +1,3 @@
-//Micaela Bernichio
-//mdb2
-//03-09-17
 //This file contains 3 functions which contribute to the main.c in order to play the game of life. Descriptions of each function come right before the 
 //functions below. countLiveNeighbor doesn't appear in main however it is necessary in order to utilize the other two functions.
 // This file is used by main to complete the game of life and display it onto the montior in steps. 

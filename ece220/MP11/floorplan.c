@@ -1,7 +1,4 @@
 #include "floorplan.h"
-//Micaela Bernichio
-//mdb2
-//4-20-17
 /* This program assembles partitioned circuit modules into a rectangular chip to
  optimize a predefined cost metric such as area. It makes parts into a "floorplan"
  and also translates that floorplan to a readable postfix expression. I coded 9 of the

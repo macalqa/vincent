@@ -1,6 +1,3 @@
-// Micaela Bernichio
-// mdb2
-//03-02-17
 // This file contains 3 functions each of which is utilized in main.c to serve a purpose.
 // The purposes of these functons contributes to the overall game.
 // The first function takes the seed inputted by the user, and checks

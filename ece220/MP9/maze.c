@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "maze.h"
-//Micaela Bernichio
-//mdb2
-//04-06-17
 
 /*
  * createMaze -- Creates and fills a maze structure from the given file

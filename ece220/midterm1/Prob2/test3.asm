@@ -1,3 +1,0 @@
-.ORIG x4000
-.FILL x006D
-.END

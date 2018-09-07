@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//Micaela Bernichio
-//mdb2
-//02-23-17
 //This program takes a polynomial and finds the roots of the polynomial through two methods:
 //Halley's method, which finds the roots through the use of repetitive testing of derivatives,
 //and Budan's theorem which uses sign change to find the number of possible roots.

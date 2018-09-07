@@ -1,5 +1,3 @@
-;Micaela Bernichio
-;mdb2
 ;This program takes a postfix expression and evaluates it by using a stack.It then prints the result in hexidecimal notation.
 ;The expressions are terminated with a semi colon and prints "Invalid Expression." when the postfix expression cannot be evaluated.
 ;R0 input from trap

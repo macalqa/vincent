@@ -1,5 +1,0 @@
-.ORIG x4000
-
-.STRINGZ "ABC2EF*3gh*"
-HALT
-.END
